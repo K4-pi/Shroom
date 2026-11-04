@@ -34,6 +34,10 @@ data class GeoFix(
 class LocationTracker(private val context: Context) {
     private val client = LocationServices.getFusedLocationProviderClient(context)
 
+    /**
+     * @brief Checks whether fine or coarse location permission is granted.
+     * @return True when either ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION is granted.
+     */
     fun hasPermission(): Boolean {
         val fine = ContextCompat.checkSelfPermission(
             context,
@@ -46,6 +50,10 @@ class LocationTracker(private val context: Context) {
         return fine || coarse
     }
 
+    /**
+     * @brief Emits fused location fixes until the collector cancels.
+     * @return Cold Flow of GeoFix values; closes immediately when permission is missing.
+     */
     @SuppressLint("MissingPermission")
     fun updates(): Flow<GeoFix> = callbackFlow {
         if (!hasPermission()) {
@@ -75,6 +83,11 @@ class LocationTracker(private val context: Context) {
         awaitClose { client.removeLocationUpdates(callback) }
     }
 
+    /**
+     * @brief Maps a platform Location into the app's GeoFix model.
+     * @receiver Source location from the fused provider.
+     * @return Populated GeoFix with optional altitude, bearing and speed.
+     */
     private fun Location.toGeoFix() = GeoFix(
         latitude = latitude,
         longitude = longitude,

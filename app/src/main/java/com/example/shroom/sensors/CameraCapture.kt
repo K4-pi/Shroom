@@ -18,16 +18,12 @@ class CameraCapture(context: Context) {
 
     private val appContext = context.applicationContext
 
-    /**
-     * File the camera is currently writing to, or `null` when no capture
-     * is in flight. Consumed by the caller once the capture succeeds.
-     */
-    var pendingFile: File? = null
+    var pendingFile: File? = null // `null` when no capture
         private set
 
     /**
-     * Creates a new photo file in the app's private Pictures directory and
-     * returns its shareable Uri, to pass as `EXTRA_OUTPUT` to the camera.
+     * @brief Creates a new photo file in the app's private Pictures directory.
+     * @return Shareable content Uri to pass as EXTRA_OUTPUT to the camera.
      */
     fun newCaptureUri(): Uri {
         val dir = File(
@@ -45,8 +41,8 @@ class CameraCapture(context: Context) {
     }
 
     /**
-     * Transfers ownership of the pending photo to the caller and clears the
-     * internal reference, so a later [clearPending] cannot delete it.
+     * @brief Transfers ownership of the pending photo to the caller.
+     * @return The pending file, or null when no capture is in flight.
      */
     fun takePending(): File? {
         val file = pendingFile
@@ -54,7 +50,10 @@ class CameraCapture(context: Context) {
         return file
     }
 
-    /** Discards a photo the camera never delivered (user cancelled / failure). */
+    /**
+     * @brief Discards a photo the camera never delivered.
+     * @return Nothing.
+     */
     fun clearPending() {
         pendingFile?.delete()
         pendingFile = null

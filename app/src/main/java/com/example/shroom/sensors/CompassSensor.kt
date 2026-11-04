@@ -28,6 +28,11 @@ class CompassSensor(context: Context) {
         val rotationMatrix = FloatArray(9)
         val orientation = FloatArray(3)
 
+        /**
+         * @brief Emits a heading only when it changed enough to redraw.
+         * @param raw Azimuth in degrees before wrapping into [0, 360).
+         * @return Nothing.
+         */
         fun emitIfChanged(raw: Float) {
             var heading = (raw + 360f) % 360f
             if (lastEmitted.isNaN() || abs(shortestAngleDelta(lastEmitted, heading)) >= 1.5f) {
@@ -45,9 +50,11 @@ class CompassSensor(context: Context) {
                         val azimuthDeg = Math.toDegrees(orientation[0].toDouble()).toFloat()
                         emitIfChanged(azimuthDeg)
                     }
+
                     Sensor.TYPE_ACCELEROMETER -> {
                         gravity = lowPass(event.values.clone(), gravity)
                     }
+
                     Sensor.TYPE_MAGNETIC_FIELD -> {
                         geomagnetic = lowPass(event.values.clone(), geomagnetic)
                         val g = gravity
@@ -100,6 +107,12 @@ class CompassSensor(context: Context) {
         awaitClose { sensorManager.unregisterListener(listener) }
     }
 
+    /**
+     * @brief Applies a simple low-pass filter to sensor samples.
+     * @param input Fresh sensor values.
+     * @param output Previous filtered values, or null on the first sample.
+     * @return Filtered values (reuses [output] when present).
+     */
     private fun lowPass(input: FloatArray, output: FloatArray?): FloatArray {
         if (output == null) return input
         for (i in input.indices) {
@@ -108,6 +121,12 @@ class CompassSensor(context: Context) {
         return output
     }
 
+    /**
+     * @brief Shortest signed angular difference between two headings.
+     * @param from Starting heading in degrees.
+     * @param to Target heading in degrees.
+     * @return Delta in the range [-180, 180].
+     */
     private fun shortestAngleDelta(from: Float, to: Float): Float {
         var delta = (to - from) % 360f
         if (delta < -180f) delta += 360f
