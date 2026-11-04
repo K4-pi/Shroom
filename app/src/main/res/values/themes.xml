@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Shroom" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/cap_red</item>
+        <item name="colorOnPrimary">@color/parchment</item>
+        <item name="colorSecondary">@color/brass</item>
+        <item name="colorOnSecondary">@color/ink_brown</item>
+        <item name="colorTertiary">@color/forest_moss</item>
+        <item name="android:colorBackground">@color/parchment</item>
+        <item name="colorSurface">@color/parchment_dark</item>
+        <item name="colorOnSurface">@color/ink_brown</item>
+        <item name="colorOnBackground">@color/ink_brown</item>
+        <item name="colorOutline">@color/wood</item>
+        <item name="android:statusBarColor">@color/ink_brown</item>
+        <item name="android:navigationBarColor">@color/ink_brown</item>
+        <item name="android:windowBackground">@color/parchment</item>
+        <item name="android:fontFamily">@font/almendra</item>
+        <item name="fontFamily">@font/almendra</item>
+    </style>
+
+    <style name="TextAppearance.Shroom.Title" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">@font/medievalsharp</item>
+        <item name="fontFamily">@font/medievalsharp</item>
+        <item name="android:textColor">@color/ink_brown</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextAppearance.Shroom.Headline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/medievalsharp</item>
+        <item name="fontFamily">@font/medievalsharp</item>
+        <item name="android:textColor">@color/ink_brown</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="TextAppearance.Shroom.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/almendra</item>
+        <item name="fontFamily">@font/almendra</item>
+        <item name="android:textColor">@color/ink_soft</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Shroom.Label" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">@font/almendra</item>
+        <item name="fontFamily">@font/almendra</item>
+        <item name="android:textColor">@color/ink_brown</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.Shroom.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="backgroundTint">@color/parchment_dark</item>
+        <item name="itemIconTint">@color/bottom_nav_color</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Shroom.BottomNav.ActiveIndicator</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="Widget.Shroom.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/brass</item>
+    </style>
+</resources>

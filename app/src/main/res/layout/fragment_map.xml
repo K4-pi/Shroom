@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_map_frame"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_margin="12dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_manuscript_panel"
+            android:elevation="6dp"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/map_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/map_title"
+                android:textAppearance="@style/TextAppearance.Shroom.Title" />
+
+            <TextView
+                android:id="@+id/map_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/map_online"
+                android:textAppearance="@style/TextAppearance.Shroom.Body" />
+
+            <TextView
+                android:id="@+id/map_coords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.Shroom.Label"
+                android:textColor="@color/ink_brown"
+                tools:text="50.08000°, 14.42000°  ±12m" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/offline_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_offline_badge"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/offline_mode"
+                android:textAppearance="@style/TextAppearance.Shroom.Label"
+                android:textColor="@color/parchment" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_compass_frame"
+        android:elevation="8dp"
+        android:padding="6dp">
+
+        <com.example.shroom.ui.map.CompassView
+            android:id="@+id/compass"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/person" />
+
+        <ImageButton
+            android:id="@+id/btn_cache"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_fab_cache"
+            android:contentDescription="@string/cache_area"
+            android:elevation="6dp"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_download" />
+
+        <ImageButton
+            android:id="@+id/btn_locate"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_fab_locate"
+            android:contentDescription="@string/center_on_me"
+            android:elevation="6dp"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_my_location" />
+    </LinearLayout>
+
+</FrameLayout>

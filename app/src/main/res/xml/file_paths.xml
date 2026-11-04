@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Photos captured when marking a map point (app-private storage). -->
+    <external-files-path
+        name="point_photos"
+        path="Pictures/points/" />
+</paths>

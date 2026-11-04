@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_manuscript_panel"
+    android:elevation="4dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/mushroom_view"
+        android:layout_width="32dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25"
+        android:background="@drawable/bg_manuscript_panel"
+        android:contentDescription="@string/brand_image"
+        android:padding="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_brand" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp">
+
+        <TextView
+            android:id="@+id/common_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/almendra"
+            android:maxLines="1"
+            android:textColor="@color/ink_brown"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Chanterelle" />
+
+        <TextView
+            android:id="@+id/latin_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/almendra"
+            android:maxLines="1"
+            android:textColor="@color/ink_soft"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            tools:text="Cantharellus cibarius" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/almendra"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.Shroom.Body"
+            tools:text="Golden vase-shaped mushrooms…" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/edibility_seal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg_wax_seal"
+        android:fontFamily="@font/almendra"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:textColor="@color/parchment"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        tools:text="Edible" />
+
+</LinearLayout>

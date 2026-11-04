@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shroom</string>
+    <string name="tab_map">Forager\'s Map</string>
+    <string name="tab_glossary">Mushroom Tome</string>
+    <string name="center_on_me">Find me</string>
+    <string name="cache_area">Cache tiles</string>
+    <string name="permission_location_rationale">Location is needed to mark your place on the forager\'s map.</string>
+    <string name="offline_hint">Tiles you\'ve viewed are kept for offline use. GPS works without a network.</string>
+    <string name="edible">Jadalny</string>
+    <string name="poisonous">Trujący</string>
+    <string name="caution">Uwaga</string>
+    <string name="map_title">Forager\'s Map</string>
+    <string name="map_online">Online · tiles caching for offline</string>
+    <string name="map_offline">Offline · GPS &amp; cached tiles</string>
+    <string name="seeking_satellites">Seeking satellites…</string>
+    <string name="offline_mode">Offline mode</string>
+    <string name="glossary_subtitle">A field manuscript of fungi</string>
+    <string name="search_hint">Seek by name or habitat…</string>
+    <string name="return_to_tome">Return to the tome</string>
+    <string name="section_description">Opis</string>
+    <string name="section_alchemist">Skład chemiczny</string>
+    <string name="section_lookalikes">Podobne</string>
+    <string name="habitat_label">Otoczenie</string>
+    <string name="season_label">Sezon</string>
+    <string name="brand_image">Shroom brand</string>
+    <string name="caching_tiles">Caching visible tiles for offline…</string>
+    <string name="cache_done">Area sealed into the tome (offline).</string>
+    <string name="cache_failed">Cache incomplete (%1$d errors).</string>
+    <string name="coords_format">%1$.5f°, %2$.5f°  ±%3$.0fm</string>
+    <string name="point_photo_prompt">Photo of the find?</string>
+    <string name="point_photo_message">Take a photo of the mushroom, or save the point with the tome\'s preset illustration.</string>
+    <string name="point_photo_yes">Take photo</string>
+    <string name="point_photo_no">Use preset</string>
+    <string name="point_pick_species">Which mushroom did you find?</string>
+    <string name="point_saved">Find marked on the map.</string>
+    <string name="point_needs_gps">Waiting for a GPS fix — try again once your position is known.</string>
+    <string name="point_discarded">Point discarded.</string>
+    <string name="point_preset_note">Saved with the tome\'s preset illustration.</string>
+</resources>

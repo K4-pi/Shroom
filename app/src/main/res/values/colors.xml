@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="parchment">#FFF3E6C8</color>
+    <color name="parchment_dark">#FFE0CFA8</color>
+    <color name="parchment_deep">#FFC9B48A</color>
+    <color name="ink_brown">#FF2C1A12</color>
+    <color name="ink_soft">#FF4A3224</color>
+    <color name="wood">#FF6B4423</color>
+    <color name="wood_light">#FF8B5E3C</color>
+    <color name="brass">#FFC9A227</color>
+    <color name="cap_red">#FFC94A2A</color>
+    <color name="forest_moss">#FF3D5A3D</color>
+    <color name="caution_amber">#FFB8860B</color>
+    <color name="seal_wax">#FF8B1E1E</color>
+    <color name="poison_purple">#FF5C3D6E</color>
+    <color name="taupe">#FFA89880</color>
+    <color name="stem_beige">#FFD4C4A8</color>
+    <color name="ic_launcher_background">#A89880</color>
+</resources>
