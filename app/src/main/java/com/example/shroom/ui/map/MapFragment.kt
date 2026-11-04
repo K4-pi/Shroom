@@ -60,6 +60,10 @@ class MapFragment : Fragment() {
         updateStatusPanel()
     }
 
+    /**
+     * @brief Camera result handler: offers the species picker for saved
+     * @brief captures and deletes the file otherwise.
+     */
     private val takePictureLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicture(),
     ) { saved ->
@@ -68,8 +72,6 @@ class MapFragment : Fragment() {
             file?.delete()
             return@registerForActivityResult
         }
-        // Saved or not, the camera has finished with the file and the
-        // marker form decides what happens to the photo next.
         if (saved && file != null && file.exists()) {
             describePoint(file.absolutePath)
         } else {
@@ -254,18 +256,20 @@ class MapFragment : Fragment() {
         return fine || coarse
     }
 
+    /**
+     * @brief Opens the capture-or-preset question for the current GPS fix.
+     * @brief Requires a live location fix; shows a toast otherwise.
+     * @return Nothing.
+     */
     private fun onSavePointClicked() {
         if (lastFix == null) {
             Toast.makeText(requireContext(), R.string.point_needs_gps, Toast.LENGTH_SHORT).show()
             return
         }
-        // Step 1: photo or preset illustration.
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.point_photo_prompt)
             .setMessage(R.string.point_photo_message)
             .setPositiveButton(R.string.point_photo_yes) { _, _ ->
-                // Hands the destination Uri to the camera; the result
-                // arrives in takePictureLauncher.
                 takePictureLauncher.launch(cameraCapture.newCaptureUri())
             }
             .setNegativeButton(R.string.point_photo_no) { _, _ ->
@@ -274,7 +278,13 @@ class MapFragment : Fragment() {
             .show()
     }
 
-    /** Step 2: identify the find by picking it from the mushroom tome. */
+    /**
+     * @brief Offers the tome's species to identify the newly captured find.
+     * @brief Cancelling discards the photo taken for this point.
+     * @param photoPath Captured photo used as the point image, or null to
+     *                  keep the tome illustration.
+     * @return Nothing.
+     */
     private fun describePoint(photoPath: String?) {
         val tome = MushroomTome.all.toTypedArray()
         val labels = arrayOfNulls<String>(tome.size)
@@ -289,11 +299,16 @@ class MapFragment : Fragment() {
                 if (photoPath != null) File(photoPath).delete()
                 Toast.makeText(requireContext(), R.string.point_discarded, Toast.LENGTH_SHORT)
                     .show()
-            }
-            .show()
+            }            .show()
     }
 
-    /** Step 3: persist the point (photo path null = tome illustration). */
+    /**
+     * @brief Persists the identified find at the current GPS fix and draws it.
+     * @brief Storing happens off the main thread; the marker only shows on success.
+     * @param mushroomId Tome id of the identified species.
+     * @param photoPath Captured photo used as the point image, or null.
+     * @return Nothing.
+     */
     private fun savePoint(mushroomId: String, photoPath: String?) {
         val fix = lastFix ?: return
 
@@ -325,6 +340,10 @@ class MapFragment : Fragment() {
         }
     }
 
+    /**
+     * @brief Adds a marker for a saved point and attaches its delete info window.
+     * @param point Saved point drawn on the map.
+     */
     private fun addPointMarker(point: ShroomPoint) {
         val mushroom = MushroomTome.byId(point.mushroomId)
         val marker = Marker(binding.map).apply {
@@ -332,14 +351,38 @@ class MapFragment : Fragment() {
             title = mushroom?.commonName ?: point.mushroomId
             subDescription = mushroom?.latinName
             if (point.photoPath == null) {
-                // Preset illustration note for points saved without a photo.
                 snippet = getString(R.string.point_preset_note)
             }
             setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         }
+        marker.setInfoWindow(
+            DeletePointInfoWindow(requireContext(), binding.map) { deletePoint(point, marker) },
+        )
         binding.map.overlays.add(marker)
         pointMarkers += marker
         binding.map.invalidate()
+    }
+
+    /**
+     * @brief Removes a saved point from the map and from the database,
+     * @brief also deleting its captured photo if present.
+     * @param point The saved point to remove.
+     * @param marker The marker currently representing the point.
+     * @return Nothing; the change is reflected on-screen and in the database.
+     */
+    private fun deletePoint(point: ShroomPoint, marker: Marker) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                pointDb.delete(point.id)
+                point.photoPath?.let { File(it).delete() }
+            }
+            if (!isAdded) return@launch
+            marker.closeInfoWindow()
+            binding.map.overlays.remove(marker)
+            pointMarkers.remove(marker)
+            binding.map.invalidate()
+            Toast.makeText(requireContext(), R.string.point_deleted, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onResume() {

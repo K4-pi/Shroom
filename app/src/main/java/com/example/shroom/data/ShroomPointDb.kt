@@ -65,6 +65,15 @@ class ShroomPointDb private constructor(context: Context) :
         }
     }
 
+    /**
+     * @brief Deletes a stored map point by its database id.
+     * @param id Row identifier as returned by [insert].
+     * @return True when a row was actually deleted.
+     */
+    fun delete(id: Long): Boolean = writableDatabase.use { db ->
+        db.delete(TABLE, "${BaseColumns._ID} = ?", arrayOf(id.toString())) > 0
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
             """

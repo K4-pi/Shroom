@@ -33,6 +33,8 @@
     <string name="point_photo_yes">Take photo</string>
     <string name="point_photo_no">Use preset</string>
     <string name="point_pick_species">Which mushroom did you find?</string>
+    <string name="point_deleted">Find removed from the map.</string>
+    <string name="point_delete_hint">Delete this find</string>
     <string name="point_saved">Find marked on the map.</string>
     <string name="point_needs_gps">Waiting for a GPS fix — try again once your position is known.</string>
     <string name="point_discarded">Point discarded.</string>
